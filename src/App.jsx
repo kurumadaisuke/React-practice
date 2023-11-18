@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
 import "./App.css";
+import { useState, useEffect } from "react";
 import { MemoList } from "./components/list.jsx";
-import { MemoEdit } from "./components/edit.jsx";
+import { MemoSelectList } from "./components/select_list.jsx";
 import { MemoAdd } from "./components/add.jsx";
+import { MemoDelete } from "./components/delete.jsx";
+import { MemoEdit } from "./components/edit.jsx";
 
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memoContexts, setMemoContexts] = useState(
-    memoStorage ? JSON.parse(memoStorage) : []
+    memoStorage ? JSON.parse(memoStorage) : [],
   );
   const [editValue, setEditValue] = useState("");
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
@@ -49,18 +51,25 @@ function App() {
   return (
     <div className="container">
       <div className="memo-list">
-        <MemoList memoTitles={memoContexts} />
+        <MemoList memoContexts={memoContexts} />
         <MemoAdd onClickAdd={onClickAdd} />
       </div>
-      <MemoEdit
-        memoTitles={memoContexts}
-        onClickTitle={onClickTitle}
-        editValue={editValue}
-        editTitle={editTitle}
-        onClickEdit={onClickEdit}
-        onClickDelete={onClickDelete}
-        selectedMemoIndex={selectedMemoIndex}
-      />
+      <div className="memo-list">
+        <MemoSelectList
+          memoContexts={memoContexts}
+          onClickTitle={onClickTitle}
+        />
+        <MemoEdit
+          editValue={editValue}
+          editTitle={editTitle}
+          onClickEdit={onClickEdit}
+          selectedMemoIndex={selectedMemoIndex}
+        />
+        <MemoDelete
+          onClickDelete={onClickDelete}
+          selectedMemoIndex={selectedMemoIndex}
+        />
+      </div>
     </div>
   );
 }

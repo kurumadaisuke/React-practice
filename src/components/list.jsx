@@ -1,7 +1,7 @@
 export const MemoList = (props) => {
-  const { memoTitles, onClickAdd } = props;
+  const { memoTitles } = props;
   return (
-    <div className="memo-list">
+    <>
       <p>一覧</p>
       <ul>
         {memoTitles.map((title, index) => (
@@ -14,9 +14,6 @@ export const MemoList = (props) => {
           </div>
         ))}
       </ul>
-      <span onClick={onClickAdd} className="link-line">
-        メモ追加
-      </span>
-    </div>
+    </>
   );
 };

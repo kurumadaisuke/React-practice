@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { MemoList } from "./components/list.jsx";
 import { MemoSelectList } from "./components/select_list.jsx";
-import { MemoAdd } from "./components/add.jsx";
+import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
 import { MemoEdit } from "./components/edit.jsx";
 
@@ -14,7 +14,7 @@ function App() {
   const [editValue, setEditValue] = useState("");
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
 
-  const onClickAdd = () => {
+  const onClickNew = () => {
     const newMemo = [...memoContexts, "新規メモ"];
     setMemoContexts(newMemo);
     setSelectedMemoIndex(newMemo.length);
@@ -52,7 +52,7 @@ function App() {
     <div className="container">
       <div className="memo-list">
         <MemoList memoContexts={memoContexts} />
-        <MemoAdd onClickAdd={onClickAdd} />
+        <NewMemoButton onClickNew={onClickNew} />
       </div>
       <div className="memo-list">
         <MemoSelectList

@@ -1,16 +1,15 @@
-export const MemoList = (props) => {
-  const { memoContexts } = props;
+export const MemoSelectList = (props) => {
+  const { memos, onClickTitle } = props;
   return (
     <>
-      <p>一覧</p>
       <ul>
-        {memoContexts.map((title, index) => (
+        {memos.map((title, index) => (
           <div key={index}>
-            <li>
+            <span onClick={() => onClickTitle(index)} className="link-line">
               {title.includes("\n")
                 ? title.substr(0, title.indexOf("\n"))
                 : title}
-            </li>
+            </span>
           </div>
         ))}
       </ul>

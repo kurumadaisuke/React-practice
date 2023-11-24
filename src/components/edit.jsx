@@ -1,9 +1,9 @@
 export const MemoEdit = (props) => {
-  const { editValue, editTitle, onClickEdit, selectedMemoIndex } = props;
+  const { editingMemoText, editTitle, onClickEdit, selectedMemoIndex } = props;
   return (
     <>
       <textarea
-        value={editValue}
+        value={editingMemoText}
         className="memo-textarea"
         placeholder="メモの内容を編集"
         onChange={editTitle}

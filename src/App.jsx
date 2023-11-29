@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { MemoSelectList } from "./components/list.jsx";
 import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
@@ -18,6 +18,7 @@ function App() {
     const newMemo = [...memos, "新規メモ"];
     setMemos(newMemo);
     setSelectedMemoIndex(newMemo.length - 1);
+    localStorage.setItem("memoStorage", JSON.stringify(newMemo));
   };
 
   const onClickTitle = (index) => {
@@ -25,14 +26,17 @@ function App() {
     setEditingMemoText(memos[index]);
   };
 
-  const editTitle = (event) => setEditingMemoText(event.target.value);
+  const editTitle = (event) => {
+    setEditingMemoText(event.target.value);
+    console.log(event.target.value);
+  };
 
   const onClickEdit = () => {
     const newMemos = [...memos];
     newMemos[selectedMemoIndex] = editingMemoText;
     setMemos(newMemos);
     setSelectedMemoIndex(null);
-    setEditingMemoText("");
+    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
   };
 
   const onClickDelete = (MemoIndex) => {
@@ -41,11 +45,8 @@ function App() {
     setMemos(newMemo);
     setSelectedMemoIndex(null);
     setEditingMemoText("");
+    localStorage.setItem("memoStorage", JSON.stringify(newMemo));
   };
-
-  useEffect(() => {
-    localStorage.setItem("memoStorage", JSON.stringify(memos));
-  }, [memos]);
 
   return (
     <div className="container">

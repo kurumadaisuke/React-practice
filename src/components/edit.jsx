@@ -4,6 +4,7 @@ export const MemoEdit = (props) => {
     <>
       <textarea
         value={editingMemoText}
+        autoFocus={true}
         className="memo-textarea"
         placeholder="メモの内容を編集"
         onChange={editTitle}

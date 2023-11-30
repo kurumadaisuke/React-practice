@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState} from "react";
+import { useState } from "react";
 import { MemoSelectList } from "./components/list.jsx";
 import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
@@ -8,10 +8,8 @@ import { MemoEdit } from "./components/edit.jsx";
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : []
+    memoStorage ? JSON.parse(memoStorage) : [],
   );
-
-  const [editingMemoText, setEditingMemoText] = useState("");
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
 
   const onClickNew = () => {
@@ -23,20 +21,17 @@ function App() {
 
   const onClickTitle = (index) => {
     setSelectedMemoIndex(index);
-    setEditingMemoText(memos[index]);
   };
 
-  const editTitle = (event) => {
-    setEditingMemoText(event.target.value);
-    console.log(event.target.value);
+  const editTxetEvent = (event) => {
+    const newMemos = [...memos];
+    newMemos[selectedMemoIndex] = event.target.value;
+    setMemos(newMemos);
   };
 
   const onClickEdit = () => {
-    const newMemos = [...memos];
-    newMemos[selectedMemoIndex] = editingMemoText;
-    setMemos(newMemos);
+    localStorage.setItem("memoStorage", JSON.stringify(memos));
     setSelectedMemoIndex(null);
-    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
   };
 
   const onClickDelete = (MemoIndex) => {
@@ -44,7 +39,6 @@ function App() {
     newMemo.splice(MemoIndex, 1);
     setMemos(newMemo);
     setSelectedMemoIndex(null);
-    setEditingMemoText("");
     localStorage.setItem("memoStorage", JSON.stringify(newMemo));
   };
 
@@ -57,9 +51,9 @@ function App() {
         {selectedMemoIndex !== null && (
           <>
             <MemoEdit
-              editingMemoText={editingMemoText}
-              editTitle={editTitle}
+              editTxetEvent={editTxetEvent}
               onClickEdit={onClickEdit}
+              MemoText={memos[selectedMemoIndex]}
               selectedMemoIndex={selectedMemoIndex}
             />
             <MemoDelete

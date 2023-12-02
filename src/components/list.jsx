@@ -1,11 +1,15 @@
 export const MemoSelectList = (props) => {
-  const { memos, onClickTitle } = props;
+  const { memos, onClickTitle, selectedMemoIndex } = props;
   return (
     <>
       <ul>
         {memos.map((title, index) => (
           <div key={index}>
-            <span onClick={() => onClickTitle(index)} className="link-line">
+            <span
+              onClick={() => onClickTitle(index)}
+              className={index === selectedMemoIndex ? "" : "link-line"}
+              onClickTitle
+            >
               {title.includes("\n")
                 ? title.substr(0, title.indexOf("\n"))
                 : title}

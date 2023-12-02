@@ -8,7 +8,7 @@ import { MemoEdit } from "./components/edit.jsx";
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : [],
+    memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
 
@@ -46,7 +46,7 @@ function App() {
     <div className="container">
       {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
       <div className="memo-list">
-        <MemoSelectList memos={memos} onClickTitle={onClickTitle} />
+        <MemoSelectList memos={memos} onClickTitle={onClickTitle} selectedMemoIndex={selectedMemoIndex}/>
         <NewMemoButton onClickNew={onClickNew} />
         {selectedMemoIndex !== null && (
           <>

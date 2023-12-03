@@ -1,15 +1,20 @@
 export const MemoEdit = (props) => {
-  const { MemoText, editTxetEvent, onClickEdit, selectedMemoIndex } = props;
+  const { MemoText, onClickEdit, selectedMemoIndex } = props;
+  let editingTxet = "";
   return (
     <>
       <textarea
-        value={MemoText}
+        defaultValue={MemoText}
         autoFocus={true}
         className="memo-textarea"
         placeholder="メモの内容を編集"
-        onChange={editTxetEvent}
+        onChange={(event) => {
+          editingTxet = event.target.value;
+        }}
       />
-      <button onClick={() => onClickEdit(selectedMemoIndex)}>編集</button>
+      <button onClick={() => onClickEdit(selectedMemoIndex, editingTxet)}>
+        編集
+      </button>
     </>
   );
 };

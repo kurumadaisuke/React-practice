@@ -23,14 +23,11 @@ function App() {
     setSelectedMemoIndex(index);
   };
 
-  const editTxetEvent = (event) => {
+  const onClickEdit = (selectedMemoIndex, editingValue) => {
     const newMemos = [...memos];
-    newMemos[selectedMemoIndex] = event.target.value;
+    newMemos[selectedMemoIndex] = editingValue;
     setMemos(newMemos);
-  };
-
-  const onClickEdit = () => {
-    localStorage.setItem("memoStorage", JSON.stringify(memos));
+    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
     setSelectedMemoIndex(null);
   };
 
@@ -46,12 +43,15 @@ function App() {
     <div className="container">
       {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
       <div className="memo-list">
-        <MemoSelectList memos={memos} onClickTitle={onClickTitle} selectedMemoIndex={selectedMemoIndex}/>
+        <MemoSelectList
+          memos={memos}
+          onClickTitle={onClickTitle}
+          selectedMemoIndex={selectedMemoIndex}
+        />
         <NewMemoButton onClickNew={onClickNew} />
         {selectedMemoIndex !== null && (
           <>
             <MemoEdit
-              editTxetEvent={editTxetEvent}
               onClickEdit={onClickEdit}
               MemoText={memos[selectedMemoIndex]}
               selectedMemoIndex={selectedMemoIndex}

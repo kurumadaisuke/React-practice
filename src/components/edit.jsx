@@ -1,6 +1,6 @@
 export const MemoEdit = (props) => {
   const { MemoText, onClickEdit, selectedMemoIndex } = props;
-  let editingTxet = "";
+  let editingTxet = MemoText;
   return (
     <>
       <textarea

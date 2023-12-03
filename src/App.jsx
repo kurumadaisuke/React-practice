@@ -8,7 +8,7 @@ import { MemoEdit } from "./components/edit.jsx";
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : [],
+    memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
 
@@ -27,8 +27,8 @@ function App() {
     const newMemos = [...memos];
     newMemos[selectedMemoIndex] = editingValue;
     setMemos(newMemos);
-    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
     setSelectedMemoIndex(null);
+    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
   };
 
   const onClickDelete = (MemoIndex) => {

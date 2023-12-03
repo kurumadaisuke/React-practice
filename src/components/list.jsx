@@ -8,7 +8,6 @@ export const MemoSelectList = (props) => {
             <span
               onClick={() => onClickTitle(index)}
               className={index === selectedMemoIndex ? "" : "link-line"}
-              onClickTitle
             >
               {title.includes("\n")
                 ? title.substr(0, title.indexOf("\n"))

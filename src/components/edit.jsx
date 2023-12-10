@@ -1,4 +1,3 @@
-// import { useEffect } from "react";
 export const MemoEdit = (props) => {
   const { MemoText, onClickEdit, selectedMemoIndex } = props;
   let editingTxet = MemoText;

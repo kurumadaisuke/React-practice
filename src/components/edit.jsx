@@ -1,10 +1,14 @@
+// import { useEffect } from "react";
 export const MemoEdit = (props) => {
   const { MemoText, onClickEdit, selectedMemoIndex } = props;
   let editingTxet = MemoText;
+
   return (
     <>
       <textarea
-        defaultValue={MemoText}
+        key={editingTxet}
+        defaultValue={editingTxet}
+        readOnly={false}
         autoFocus={true}
         className="memo-textarea"
         placeholder="メモの内容を編集"

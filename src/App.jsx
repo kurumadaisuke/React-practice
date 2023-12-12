@@ -11,12 +11,26 @@ function App() {
     memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
+  const storage = "memoStorage";
+
+  const saveMemos = ({ newMemo, selectedMemoIndex, editingValue }) => {
+    const newMemos = [...memos];
+    if (newMemo) {
+      newMemos.push(newMemo);
+      setSelectedMemoIndex(newMemos.length - 1);
+    } else if (editingValue !== undefined) {
+      newMemos[selectedMemoIndex] = editingValue;
+      setSelectedMemoIndex(null);
+    } else if (selectedMemoIndex !== undefined) {
+      newMemos.splice(selectedMemoIndex, 1);
+      setSelectedMemoIndex(null);
+    }
+    setMemos(newMemos);
+    localStorage.setItem(storage, JSON.stringify(newMemos));
+  };
 
   const onClickNew = () => {
-    const newMemo = [...memos, "新規メモ"];
-    setMemos(newMemo);
-    setSelectedMemoIndex(newMemo.length - 1);
-    localStorage.setItem("memoStorage", JSON.stringify(newMemo));
+    saveMemos({ newMemo: "新規メモ" });
   };
 
   const onClickTitle = (index) => {
@@ -24,19 +38,14 @@ function App() {
   };
 
   const onClickEdit = (selectedMemoIndex, editingValue) => {
-    const newMemos = [...memos];
-    newMemos[selectedMemoIndex] = editingValue;
-    setMemos(newMemos);
-    setSelectedMemoIndex(null);
-    localStorage.setItem("memoStorage", JSON.stringify(newMemos));
+    saveMemos({
+      selectedMemoIndex: selectedMemoIndex,
+      editingValue: editingValue,
+    });
   };
 
-  const onClickDelete = (MemoIndex) => {
-    const newMemo = [...memos];
-    newMemo.splice(MemoIndex, 1);
-    setMemos(newMemo);
-    setSelectedMemoIndex(null);
-    localStorage.setItem("memoStorage", JSON.stringify(newMemo));
+  const onClickDelete = (selectedMemoIndex) => {
+    saveMemos({ selectedMemoIndex: selectedMemoIndex });
   };
 
   return (

@@ -8,29 +8,20 @@ import { MemoEdit } from "./components/edit.jsx";
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : [],
+    memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
-  const storage = "memoStorage";
+  const MEMO_STORAGE = "memoStorage";
 
-  const saveMemos = ({ newMemo, selectedMemoIndex, editingValue }) => {
-    const newMemos = [...memos];
-    if (newMemo) {
-      newMemos.push(newMemo);
-      setSelectedMemoIndex(newMemos.length - 1);
-    } else if (editingValue !== undefined) {
-      newMemos[selectedMemoIndex] = editingValue;
-      setSelectedMemoIndex(null);
-    } else if (selectedMemoIndex !== undefined) {
-      newMemos.splice(selectedMemoIndex, 1);
-      setSelectedMemoIndex(null);
-    }
+  const saveMemos = (newMemos) => {
     setMemos(newMemos);
-    localStorage.setItem(storage, JSON.stringify(newMemos));
+    localStorage.setItem(MEMO_STORAGE, JSON.stringify(newMemos));
   };
 
   const onClickNew = () => {
-    saveMemos({ newMemo: "新規メモ" });
+    const newMemos = [...memos, "新規メモ"];
+    setSelectedMemoIndex(newMemos.length - 1);
+    saveMemos(newMemos);
   };
 
   const onClickTitle = (index) => {
@@ -38,14 +29,17 @@ function App() {
   };
 
   const onClickEdit = (selectedMemoIndex, editingValue) => {
-    saveMemos({
-      selectedMemoIndex: selectedMemoIndex,
-      editingValue: editingValue,
-    });
+    const newMemos = [...memos];
+    newMemos[selectedMemoIndex] = editingValue;
+    setSelectedMemoIndex(null);
+    saveMemos(newMemos);
   };
 
   const onClickDelete = (selectedMemoIndex) => {
-    saveMemos({ selectedMemoIndex: selectedMemoIndex });
+    const newMemos = [...memos];
+    newMemos.splice(selectedMemoIndex, 1);
+    setSelectedMemoIndex(null);
+    saveMemos(newMemos);
   };
 
   return (

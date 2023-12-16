@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { LoginContext } from "../providers/LoginProvider";
+
 export const MemoEdit = (props) => {
   const { memoText, onClickEdit, selectedMemoIndex } = props;
+  const { login } = useContext(LoginContext);
   let editingTxet = memoText;
 
   return (
@@ -15,9 +19,11 @@ export const MemoEdit = (props) => {
           editingTxet = event.target.value;
         }}
       />
-      <button onClick={() => onClickEdit(selectedMemoIndex, editingTxet)}>
-        編集
-      </button>
+      {login && (
+        <button onClick={() => onClickEdit(selectedMemoIndex, editingTxet)}>
+          編集
+        </button>
+      )}
     </>
   );
 };

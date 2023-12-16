@@ -10,7 +10,7 @@ import { LoginProvider } from "./providers/LoginProvider.jsx";
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : []
+    memoStorage ? JSON.parse(memoStorage) : [],
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
   const MEMO_STORAGE = "memoStorage";

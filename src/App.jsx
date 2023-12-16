@@ -4,11 +4,13 @@ import { MemoSelectList } from "./components/list.jsx";
 import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
 import { MemoEdit } from "./components/edit.jsx";
+import { Login } from "./components/login.jsx";
+import { LoginProvider } from "./providers/LoginProvider.jsx";
 
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : [],
+    memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
   const MEMO_STORAGE = "memoStorage";
@@ -43,30 +45,35 @@ function App() {
   };
 
   return (
-    <div className="container">
-      {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
-      <div className="memo-list">
-        <MemoSelectList
-          memos={memos}
-          onClickTitle={onClickTitle}
-          selectedMemoIndex={selectedMemoIndex}
-        />
-        <NewMemoButton onClickNew={onClickNew} />
-        {selectedMemoIndex !== null && (
-          <>
-            <MemoEdit
-              onClickEdit={onClickEdit}
-              memoText={memos[selectedMemoIndex]}
+    <LoginProvider>
+      <div className="container">
+        {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
+        <div className="vertical-center">
+          <Login />
+          <div className="memo-list">
+            <MemoSelectList
+              memos={memos}
+              onClickTitle={onClickTitle}
               selectedMemoIndex={selectedMemoIndex}
             />
-            <MemoDelete
-              onClickDelete={onClickDelete}
-              selectedMemoIndex={selectedMemoIndex}
-            />
-          </>
-        )}
+            <NewMemoButton onClickNew={onClickNew} />
+            {selectedMemoIndex !== null && (
+              <>
+                <MemoEdit
+                  onClickEdit={onClickEdit}
+                  memoText={memos[selectedMemoIndex]}
+                  selectedMemoIndex={selectedMemoIndex}
+                />
+                <MemoDelete
+                  onClickDelete={onClickDelete}
+                  selectedMemoIndex={selectedMemoIndex}
+                />
+              </>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </LoginProvider>
   );
 }
 

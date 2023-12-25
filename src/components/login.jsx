@@ -1,17 +1,17 @@
 import { useContext } from "react";
-import { LoginContext } from "../providers/LoginProvider";
+import { LoggedInContext } from "../providers/loggedInProvider";
 
 export const Login = () => {
-  const { login, setLogin } = useContext(LoginContext);
+  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
   const loginClick = () => {
-    setLogin(!login);
+    setLoggedIn(!loggedIn);
   };
 
   return (
     <>
-      <p className="login-info">{login ? "ログイン済み" : "未ログイン"}</p>
+      <p className="login-info">{loggedIn ? "ログイン済み" : "未ログイン"}</p>
       <button className="login-button" onClick={loginClick}>
-        {login ? "ログアウト" : "ログイン"}
+        {loggedIn ? "ログアウト" : "ログイン"}
       </button>
     </>
   );

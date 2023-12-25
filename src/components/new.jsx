@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { LoginContext } from "../providers/LoginProvider";
+import { LoggedInContext } from "../providers/loggedInProvider";
 
 export const NewMemoButton = (props) => {
   const { onClickNew } = props;
-  const { login } = useContext(LoginContext);
+  const { loggedIn } = useContext(LoggedInContext);
   return (
     <>
-      {login && (
+      {loggedIn && (
         <span onClick={onClickNew} className="link-line">
           メモ追加
         </span>

@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { LoginContext } from "../providers/LoginProvider";
+import { LoggedInContext } from "../providers/loggedInProvider";
 
 export const MemoDelete = (props) => {
   const { onClickDelete, selectedMemoIndex } = props;
-  const { login } = useContext(LoginContext);
+  const { loggedIn } = useContext(LoggedInContext);
   return (
     <>
-      {login && (
+      {loggedIn && (
         <button onClick={() => onClickDelete(selectedMemoIndex)}>削除</button>
       )}
     </>

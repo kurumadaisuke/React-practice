@@ -41,7 +41,7 @@ body {
   gap: 10px;
 }
 
-.vertical-center {
+.center-vertically {
   display: flex;
   flex-direction: column;
 }

@@ -5,12 +5,12 @@ import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
 import { MemoEdit } from "./components/edit.jsx";
 import { Login } from "./components/login.jsx";
-import { LoginProvider } from "./providers/LoginProvider.jsx";
+import { LoggedInProvider } from "./providers/loggedInProvider.jsx";
 
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
   const [memos, setMemos] = useState(
-    memoStorage ? JSON.parse(memoStorage) : [],
+    memoStorage ? JSON.parse(memoStorage) : []
   );
   const [selectedMemoIndex, setSelectedMemoIndex] = useState(null);
   const MEMO_STORAGE = "memoStorage";
@@ -45,10 +45,10 @@ function App() {
   };
 
   return (
-    <LoginProvider>
+    <LoggedInProvider>
       <div className="container">
         {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
-        <div className="vertical-center">
+        <div className="center-vertically">
           <Login />
           <div className="memo-list">
             <MemoSelectList
@@ -73,7 +73,7 @@ function App() {
           </div>
         </div>
       </div>
-    </LoginProvider>
+    </LoggedInProvider>
   );
 }
 

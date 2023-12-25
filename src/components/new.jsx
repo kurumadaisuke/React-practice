@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { LoggedInContext } from "../providers/loggedInProvider";
+import { useLoggedIn } from "../providers/loggedInProvider";
 
 export const NewMemoButton = (props) => {
   const { onClickNew } = props;
-  const { loggedIn } = useContext(LoggedInContext);
+  const { loggedIn } = useLoggedIn();
   return (
     <>
       {loggedIn && (

@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { LoggedInContext } from "../providers/loggedInProvider";
+import { useLoggedIn } from "../providers/loggedInProvider";
 
 export const Login = () => {
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+  const { loggedIn, setLoggedIn } = useLoggedIn();
   const loginClick = () => {
     setLoggedIn(!loggedIn);
   };

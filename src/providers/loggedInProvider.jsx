@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
-export const LoggedInContext = createContext({});
+const LoggedInContext = createContext();
 
 export const LoggedInProvider = (props) => {
   const { children } = props;
@@ -11,3 +11,5 @@ export const LoggedInProvider = (props) => {
     </LoggedInContext.Provider>
   );
 };
+
+export const useLoggedIn = () => useContext(LoggedInContext);

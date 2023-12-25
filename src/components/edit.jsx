@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { LoggedInContext } from "../providers/loggedInProvider";
+import { useLoggedIn } from "../providers/loggedInProvider";
 
 export const MemoEdit = (props) => {
   const { memoText, onClickEdit, selectedMemoIndex } = props;
-  const { loggedIn } = useContext(LoggedInContext);
+  const { loggedIn } = useLoggedIn();
   let editingTxet = memoText;
 
   return (

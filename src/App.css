@@ -40,3 +40,23 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.center-vertically {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: #ffffff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.login-info {
+  font-size: 1.5em;
+}

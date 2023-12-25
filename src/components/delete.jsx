@@ -1,8 +1,13 @@
+import { useLoggedIn } from "../providers/loggedInProvider";
+
 export const MemoDelete = (props) => {
   const { onClickDelete, selectedMemoIndex } = props;
+  const { loggedIn } = useLoggedIn();
   return (
     <>
-      <button onClick={() => onClickDelete(selectedMemoIndex)}>削除</button>
+      {loggedIn && (
+        <button onClick={() => onClickDelete(selectedMemoIndex)}>削除</button>
+      )}
     </>
   );
 };

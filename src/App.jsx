@@ -4,6 +4,8 @@ import { MemoSelectList } from "./components/list.jsx";
 import { NewMemoButton } from "./components/new.jsx";
 import { MemoDelete } from "./components/delete.jsx";
 import { MemoEdit } from "./components/edit.jsx";
+import { Login } from "./components/login.jsx";
+import { LoggedInProvider } from "./providers/loggedInProvider.jsx";
 
 function App() {
   const memoStorage = localStorage.getItem("memoStorage");
@@ -43,30 +45,35 @@ function App() {
   };
 
   return (
-    <div className="container">
-      {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
-      <div className="memo-list">
-        <MemoSelectList
-          memos={memos}
-          onClickTitle={onClickTitle}
-          selectedMemoIndex={selectedMemoIndex}
-        />
-        <NewMemoButton onClickNew={onClickNew} />
-        {selectedMemoIndex !== null && (
-          <>
-            <MemoEdit
-              onClickEdit={onClickEdit}
-              memoText={memos[selectedMemoIndex]}
+    <LoggedInProvider>
+      <div className="container">
+        {selectedMemoIndex === null ? <p>一覧</p> : <p>編集</p>}
+        <div className="center-vertically">
+          <Login />
+          <div className="memo-list">
+            <MemoSelectList
+              memos={memos}
+              onClickTitle={onClickTitle}
               selectedMemoIndex={selectedMemoIndex}
             />
-            <MemoDelete
-              onClickDelete={onClickDelete}
-              selectedMemoIndex={selectedMemoIndex}
-            />
-          </>
-        )}
+            <NewMemoButton onClickNew={onClickNew} />
+            {selectedMemoIndex !== null && (
+              <>
+                <MemoEdit
+                  onClickEdit={onClickEdit}
+                  memoText={memos[selectedMemoIndex]}
+                  selectedMemoIndex={selectedMemoIndex}
+                />
+                <MemoDelete
+                  onClickDelete={onClickDelete}
+                  selectedMemoIndex={selectedMemoIndex}
+                />
+              </>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </LoggedInProvider>
   );
 }
 

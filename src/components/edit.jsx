@@ -1,5 +1,8 @@
+import { useLoggedIn } from "../providers/loggedInProvider";
+
 export const MemoEdit = (props) => {
   const { memoText, onClickEdit, selectedMemoIndex } = props;
+  const { loggedIn } = useLoggedIn();
   let editingTxet = memoText;
 
   return (
@@ -15,9 +18,11 @@ export const MemoEdit = (props) => {
           editingTxet = event.target.value;
         }}
       />
-      <button onClick={() => onClickEdit(selectedMemoIndex, editingTxet)}>
-        編集
-      </button>
+      {loggedIn && (
+        <button onClick={() => onClickEdit(selectedMemoIndex, editingTxet)}>
+          編集
+        </button>
+      )}
     </>
   );
 };
